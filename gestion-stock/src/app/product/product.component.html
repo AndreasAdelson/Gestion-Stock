@@ -1,0 +1,48 @@
+<div *ngIf="products.length > 0 else empty">
+  <h2>{{products.length}} Products</h2>
+  <table style="width:100%" border="1">
+    <tr>
+      <th>Nom</th>
+      <th>Supplier</th> 
+      <th>Description</th>
+      <th>Ingredients</th>
+      <th>Age</th>
+      <th>Prix</th>
+      <th>Option</th>
+    </tr>
+    <tr *ngFor="let produit of products">
+      <td >{{produit.name | uppercase}}</td>
+      <td >{{produit.supplier}}</td> 
+      <td >{{produit.description | lowercase | slice:0:20}}</td>
+      <td >{{produit.ingredients}}</td>
+      <td >{{produit.age | age}}</td>
+      <td >{{produit.price}} €</td>
+      <td><button (click)="deleteProduct(produit.name)">Delete product</button></td>
+    </tr>
+  </table>
+</div>
+<button (click)="toggleFormulaire()">Ajouter un produit</button>
+<div *ngIf="show === true">
+  <form (ngSubmit)="register()" [formGroup]="productGroup">
+    <div>
+      <label>Name</label><input formControlName="name" >
+      <div *ngIf="nameCtrl.dirty && nameCtrl.hasError('required')" class="error">The name is required</div>
+    </div>
+    <div>
+      <label>Supplier</label><input formControlName="supplier" >
+      <div *ngIf="supplierCtrl.dirty && supplierCtrl.hasError('required')" class="error">The supplier is required</div>
+    </div>
+    <div>
+      <label>Age</label><input type="number" formControlName="age" >
+      <div *ngIf="ageCtrl.dirty && ageCtrl.hasError('required')" class="error">The age is required</div>
+    </div>
+    <div>
+      <label>Description</label><input type="text" formControlName="age" >
+      <div *ngIf="descriptionCtrl.dirty && nameCtrl.hasError('required')" class="error">The description is required</div>
+    </div>
+    <button type="submit" [disabled]="productGroup.invalid">Register</button>
+  </form>
+</div>
+<ng-template #empty>
+  <h2>No products</h2>
+</ng-template>

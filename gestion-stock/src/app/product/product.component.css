@@ -1,0 +1,6 @@
+table tr:nth-child(odd){
+    background-color:#e0e0eb;
+  }
+.error {
+  color: blue;
+}

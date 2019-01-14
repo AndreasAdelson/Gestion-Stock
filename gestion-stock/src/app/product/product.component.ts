@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {StoreService} from '../store.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { resetComponentState } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-product',
@@ -20,7 +21,7 @@ show = false;
   constructor(private productsService: StoreService, fb: FormBuilder) {
     this.nameCtrl = fb.control('', Validators.required);
     this.supplierCtrl = fb.control('', Validators.required);
-    this.ageCtrl= fb.control('', Validators.required);
+    this.ageCtrl= fb.control('', [Validators.required, Validators.pattern('[0-9]')]);
     this.descriptionCtrl =fb.control('', Validators.required);
     this.productGroup = fb.group({
       name: this.nameCtrl,
@@ -46,10 +47,16 @@ show = false;
     return this.show;
   }
   register() {
-    console.log(this.productGroup.value);
+    this.show = false;
     this.productsService.add(this.productGroup.value);
+    this.reset()    
   }
-
+  reset() {
+    this.nameCtrl.setValue('');
+    this.supplierCtrl.setValue('');
+    this.ageCtrl.setValue('');
+    this.descriptionCtrl.setValue('');
+  }
   ngOnInit() {
     this.products = this.productsService.list();
     

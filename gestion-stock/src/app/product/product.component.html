@@ -37,7 +37,7 @@
       <div *ngIf="ageCtrl.dirty && ageCtrl.hasError('required')" class="error">The age is required</div>
     </div>
     <div>
-      <label>Description</label><input type="text" formControlName="age" >
+      <label>Description</label><input type="text" formControlName="description" >
       <div *ngIf="descriptionCtrl.dirty && nameCtrl.hasError('required')" class="error">The description is required</div>
     </div>
     <button type="submit" [disabled]="productGroup.invalid">Register</button>

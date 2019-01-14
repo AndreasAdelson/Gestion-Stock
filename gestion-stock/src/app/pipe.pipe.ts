@@ -9,7 +9,7 @@ export class PipePipe implements PipeTransform {
     if (value < 1) {
       return 'moins d\'un an d\'age';
     } else {
-      return value + ' d\'age';
+      return value + ' ans d\'age';
     }
   }
 

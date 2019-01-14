@@ -12,7 +12,9 @@ export class StoreService {
   list() {
     return tProduits;
   }
-  add(user) {
-    tProduits.push(user);
+  add(product) {
+    product.price = 0.00;
+    product.ingredients = 'Ce n\'est pas demandé :p'
+    tProduits.push(product);
   }
 }
